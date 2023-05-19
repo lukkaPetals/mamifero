@@ -28,5 +28,14 @@ fastify.post('/cadastro', (req, reply) => __awaiter(void 0, void 0, void 0, func
         }
     });
 }));
+fastify.get('/busca/:nome', (req, reply) => __awaiter(void 0, void 0, void 0, function* () {
+    let nome = req.params.nome;
+    let panda = yield prisma.panda.findUnique({
+        where: {
+            nome: nome
+        }
+    });
+    console.log(panda);
+}));
 fastify.listen({ port: 3000 });
 console.log('Online');

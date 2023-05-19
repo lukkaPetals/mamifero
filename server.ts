@@ -19,7 +19,16 @@ fastify.post('/cadastro', async(req : any, reply : any) => {
   })
 })
 
+fastify.get('/busca/:nome', async(req: any, reply : any) => {
+  let nome = req.params.nome
+  let panda = await prisma.panda.findUnique({
+    where: {
+      nome: nome
+    }
+  })
+  reply.send(panda)
 
+})
 
 fastify.listen({ port: 3000 })
 console.log('Online')
