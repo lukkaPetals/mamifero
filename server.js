@@ -31,9 +31,11 @@ fastify.post('/cadastro', (req, reply) => __awaiter(void 0, void 0, void 0, func
 }));
 fastify.get('/busca/:nome', (req, reply) => __awaiter(void 0, void 0, void 0, function* () {
     let nome = req.params.nome;
-    let panda = yield prisma.panda.findUnique({
+    let panda = yield prisma.panda.findMany({
         where: {
-            nome: nome
+            nome: {
+                contains: nome
+            }
         }
     });
     reply.send(panda);

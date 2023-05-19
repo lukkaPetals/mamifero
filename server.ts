@@ -22,9 +22,11 @@ fastify.post('/cadastro', async(req : any, reply : any) => {
 
 fastify.get('/busca/:nome', async(req: any, reply : any) => {
   let nome = req.params.nome
-  let panda = await prisma.panda.findUnique({
+  let panda = await prisma.panda.findMany({
     where: {
-      nome: nome
+      nome: {
+        contains: nome
+      }
     }
   })
   reply.send(panda)
