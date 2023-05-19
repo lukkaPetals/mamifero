@@ -27,7 +27,28 @@ fastify.get('/busca/:nome', async(req: any, reply : any) => {
     }
   })
   reply.send(panda)
+})
 
+fastify.put('/atualizar/:nome', async(req: any, reply : any) => {
+  let nome = req.params.nome
+  await prisma.panda.update({
+    where: {
+      nome: nome
+    },
+    data: {
+      nome: req.body.Nome,
+      personalidade: req.body.Personalidade,
+      idade: req.body.Idade,
+      vacinado: req.body.Vacinado
+    }
+  })
+
+  let mostrar = await prisma.panda.findUnique({
+    where: {
+      nome: req.body.Nome
+    }
+  })
+  reply.send(mostrar)
 })
 
 fastify.listen({ port: 3000 })

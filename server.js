@@ -35,7 +35,27 @@ fastify.get('/busca/:nome', (req, reply) => __awaiter(void 0, void 0, void 0, fu
             nome: nome
         }
     });
-    console.log(panda);
+    reply.send(panda);
+}));
+fastify.put('/atualizar/:nome', (req, reply) => __awaiter(void 0, void 0, void 0, function* () {
+    let nome = req.params.nome;
+    yield prisma.panda.update({
+        where: {
+            nome: nome
+        },
+        data: {
+            nome: req.body.Nome,
+            personalidade: req.body.Personalidade,
+            idade: req.body.Idade,
+            vacinado: req.body.Vacinado
+        }
+    });
+    let mostrar = yield prisma.panda.findUnique({
+        where: {
+            nome: req.body.Nome
+        }
+    });
+    reply.send(mostrar);
 }));
 fastify.listen({ port: 3000 });
 console.log('Online');
