@@ -37,6 +37,11 @@ fastify.get('/busca/:nome', (req, reply) => __awaiter(void 0, void 0, void 0, fu
     });
     reply.send(panda);
 }));
+fastify.get('/busca/todos', (req, reply) => __awaiter(void 0, void 0, void 0, function* () {
+    let nome = req.params.nome;
+    let panda = yield prisma.panda.findMany();
+    reply.send(panda);
+}));
 fastify.put('/atualizar/:nome', (req, reply) => __awaiter(void 0, void 0, void 0, function* () {
     let nome = req.params.nome;
     yield prisma.panda.update({

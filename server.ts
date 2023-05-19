@@ -29,6 +29,12 @@ fastify.get('/busca/:nome', async(req: any, reply : any) => {
   reply.send(panda)
 })
 
+fastify.get('/busca/todos', async(req: any, reply : any) => {
+  let nome = req.params.nome
+  let panda = await prisma.panda.findMany()
+  reply.send(panda)
+})
+
 fastify.put('/atualizar/:nome', async(req: any, reply : any) => {
   let nome = req.params.nome
   await prisma.panda.update({
