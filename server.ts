@@ -17,6 +17,7 @@ fastify.post('/cadastro', async(req : any, reply : any) => {
       vacinado: req.body.Vacinado
     }
   })
+  reply.send('Criado com sucesso')
 })
 
 fastify.get('/busca/:nome', async(req: any, reply : any) => {

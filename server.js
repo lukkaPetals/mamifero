@@ -27,6 +27,7 @@ fastify.post('/cadastro', (req, reply) => __awaiter(void 0, void 0, void 0, func
             vacinado: req.body.Vacinado
         }
     });
+    reply.send('Criado com sucesso');
 }));
 fastify.get('/busca/:nome', (req, reply) => __awaiter(void 0, void 0, void 0, function* () {
     let nome = req.params.nome;
