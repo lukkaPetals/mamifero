@@ -51,5 +51,16 @@ fastify.put('/atualizar/:nome', async(req: any, reply : any) => {
   reply.send(mostrar)
 })
 
+
+fastify.delete('/deletar/:nome', async(req: any, reply : any) => {
+  let nome = req.params.nome
+  let panda = await prisma.panda.delete({
+    where: {
+      nome: nome
+    }
+  })
+  reply.send("Panda apagado com sucesso")
+})
+
 fastify.listen({ port: 3000 })
 console.log('Online')

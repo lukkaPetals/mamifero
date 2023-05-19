@@ -57,5 +57,14 @@ fastify.put('/atualizar/:nome', (req, reply) => __awaiter(void 0, void 0, void 0
     });
     reply.send(mostrar);
 }));
+fastify.delete('/deletar/:nome', (req, reply) => __awaiter(void 0, void 0, void 0, function* () {
+    let nome = req.params.nome;
+    let panda = yield prisma.panda.delete({
+        where: {
+            nome: nome
+        }
+    });
+    reply.send("Panda apagado com sucesso");
+}));
 fastify.listen({ port: 3000 });
 console.log('Online');
